@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import { getAllUsersFromServer } from '../data/api';
 
 export const User = () => {
-    const [users, setUsers] = useState({});
+    const [users, setUsers] = useState([]);
+
+    const getUsers = async () => {
+        const users = await getAllUsersFromServer();
+        setUsers(users.data);
+        console.log(users);
+    }
     useEffect(() => {
-        const users = getAllUsersFromServer();
-        setUsers(users);
+        getUsers();
     }, []);
     return (
         <div>
